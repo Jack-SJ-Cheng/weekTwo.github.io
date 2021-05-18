@@ -8,9 +8,6 @@ function verification(){
         if(res.data.success == false){
             const reLogIn = document.querySelector('.verification');
             reLogIn.innerHTML = "請返回上一頁重新登入";
-        }else if(res.data.success == true){
-            const reLogIn = document.querySelector('.verification');
-            reLogIn.innerHTML = '成功登入';
         }
     })
     .catch(err=>{
