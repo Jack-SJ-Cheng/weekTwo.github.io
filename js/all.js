@@ -4,7 +4,7 @@ const logIn = document.querySelector(".logIn");
 
 
 logIn.addEventListener("click", (e) => {
-  e.preventDefault();
+
   const username = document.querySelector("#username").value;
   const password = document.querySelector("#password").value;
   const user = {
