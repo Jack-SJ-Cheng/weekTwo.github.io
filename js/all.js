@@ -19,7 +19,7 @@ logIn.addEventListener("click", (e) => {
     if(res.data.success === true){
       const token = res.data.token;
       const expired = res.data.expired;
-      document.cookie = `weekTwoToken=${token}; expires=${expired}`;
+      document.cookie = `weekTwoToken=${token}; expires=${new Date(expired)}`;
     }
   })
   .catch(err=>{
