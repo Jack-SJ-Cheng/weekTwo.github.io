@@ -10,8 +10,5 @@ function verification(){
             reLogIn.innerHTML = "請返回上一頁重新登入";
         }
     })
-    .catch(err=>{
-        console.log(err);
-    })
 }
 verification();
