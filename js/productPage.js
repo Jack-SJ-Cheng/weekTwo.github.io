@@ -1,6 +1,6 @@
 const productList = document.querySelector('#productList');
-productList.addEventListener('click',e=>{
-    if(e.target.dataset.action == 'remove'){app.delete(e.target.dataset.id);}
+productList.addEventListener('click', e => {
+    if (e.target.dataset.action == 'remove') { app.delete(e.target.dataset.id); }
 })
 
 const app = {
@@ -23,7 +23,7 @@ const app = {
             </td>
             <td width="100">
                 <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" ${item.enable? 'checked':''}>
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" ${item.enable ? 'checked' : ''}>
                 </div>
             </td>
             <td width="120">
@@ -35,29 +35,34 @@ const app = {
         productList.innerHTML = str;
         productCount.innerHTML = `${this.data.products.length}`
     },
-    create(){
+    create() {
         const token = document.cookie.replace(/(?:(?:^|.*;\s*)weekTwoToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
         axios.defaults.headers.common.Authorization = token;
         this.getData();
     },
-    getData(){
+    getData() {
         axios.get(`${this.data.url}/api/${this.data.path}/admin/products/all`)
-        .then(res=>{
-            let productArr = Object.values(res.data.products) || [];
-            this.data.products = [];
-            productArr.forEach(item=>{
-                item.enable = true;
-                this.data.products.push(item);
+            .then(res => {
+                let productArr = [];
+                this.data.products = [];
+                console.log(res);
+                if (res.data.products !== null) {
+                    console.log('2');
+                    productArr = Object.values(res.data.products);
+                    productArr.forEach(item => {
+                        item.enable = true;
+                        this.data.products.push(item);
+                    })
+                }
+                this.render();
             })
-            this.render();
-        })
     },
-    delete(id){
+    delete(id) {
         axios.delete(`${this.data.url}/api/${this.data.path}/admin/product/${id}`)
-        .then(res=>{
-            console.log(res);
-            this.getData();
-        })
+            .then(res => {
+                console.log(res);
+                this.getData();
+            })
     }
 }
 app.create();
