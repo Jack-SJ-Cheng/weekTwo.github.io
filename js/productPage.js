@@ -47,7 +47,6 @@ const app = {
                 this.data.products = [];
                 console.log(res);
                 if (res.data.products !== null) {
-                    console.log('2');
                     productArr = Object.values(res.data.products);
                     productArr.forEach(item => {
                         item.enable = true;
@@ -56,12 +55,18 @@ const app = {
                 }
                 this.render();
             })
+            .catch(err=>{
+                console.log(err);
+            })
     },
     delete(id) {
         axios.delete(`${this.data.url}/api/${this.data.path}/admin/product/${id}`)
             .then(res => {
                 console.log(res);
                 this.getData();
+            })
+            .catch(err=>{
+                console.log(err);
             })
     }
 }
